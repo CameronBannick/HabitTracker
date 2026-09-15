@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="ground" cx="50%" cy="42%" r="70%">
+      <stop offset="0%"   stop-color="#102F5C"/>
+      <stop offset="45%"  stop-color="#08182F"/>
+      <stop offset="100%" stop-color="#040810"/>
+    </radialGradient>
+    <filter id="bloom" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" fill="url(#ground)"/>
+
+  <g transform="translate(214 214) scale(1.0642857142857143)" filter="url(#bloom)"
+     fill="none" stroke="#1E7FFF" stroke-width="26"
+     stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- Row 1: ticked -->
+    <rect x="70" y="80" width="110" height="110" rx="22"/>
+    <path d="M98 136 L122 160 L158 110" stroke="#A8CCFF" stroke-width="24"/>
+    <path d="M240 135 H490"/>
+
+    <!-- Row 2: ticked -->
+    <rect x="70" y="225" width="110" height="110" rx="22"/>
+    <path d="M98 281 L122 305 L158 255" stroke="#A8CCFF" stroke-width="24"/>
+    <path d="M240 280 H440"/>
+
+    <!-- Row 3: open -->
+    <rect x="70" y="370" width="110" height="110" rx="22"/>
+    <path d="M240 425 H470"/>
+  </g>
+</svg>
