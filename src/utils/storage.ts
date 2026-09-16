@@ -23,11 +23,32 @@ export function isEmptyState(state: AppState): boolean {
 }
 
 /**
+ * Activities taken off the roster. Their saved habits are dropped on load:
+ * the weekly auto-seed copies the prior week forward, so one left behind would
+ * reappear in every future week, and its signal would now reach a LevelUp that
+ * no longer knows the id (unknown ids are skipped permanently — a silent
+ * no-XP tick). `yoga` moved to ProtocolsTracker as the "Flexibility" action.
+ * XP already awarded is untouched; it lives in LevelUp's own history.
+ */
+const RETIRED_ACTIVITY_IDS = new Set(['yoga'])
+
+const habitIdOf = (slot: string): string => slot.slice(0, slot.lastIndexOf(':'))
+
+/**
  * Spread `emptyState()` UNDER the parsed blob so a field added in a later
  * version can't crash on data written by an older one.
  */
 export function hydrate(parsed: Partial<AppState>): AppState {
-  return { ...emptyState(), ...parsed, schemaVersion: SCHEMA_VERSION }
+  const state = { ...emptyState(), ...parsed, schemaVersion: SCHEMA_VERSION }
+  const retired = new Set(
+    state.habits.filter((h) => RETIRED_ACTIVITY_IDS.has(h.activityId)).map((h) => h.id)
+  )
+  if (retired.size === 0) return state
+  return {
+    ...state,
+    habits: state.habits.filter((h) => !retired.has(h.id)),
+    completedHabits: state.completedHabits.filter((slot) => !retired.has(habitIdOf(slot))),
+  }
 }
 
 export function loadState(): AppState | null {

@@ -65,7 +65,6 @@ export const HABIT_ROSTER: RosterActivity[] = [
 
   // Health
   { activityId: 'steps',       name: '5,000+ Steps in a Day', categoryId: 'health', basePoints: 15 },
-  { activityId: 'yoga',        name: 'Stretch/Yoga',          categoryId: 'health', basePoints: 15 },
   { activityId: 'sauna',       name: 'Sauna',                 categoryId: 'health', basePoints: 15 },
   { activityId: 'cold_plunge', name: 'Cold Plunge',           categoryId: 'health', basePoints: 15 },
 
