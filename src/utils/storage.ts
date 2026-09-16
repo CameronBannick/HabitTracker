@@ -27,10 +27,11 @@ export function isEmptyState(state: AppState): boolean {
  * the weekly auto-seed copies the prior week forward, so one left behind would
  * reappear in every future week, and its signal would now reach a LevelUp that
  * no longer knows the id (unknown ids are skipped permanently — a silent
- * no-XP tick). `yoga` moved to ProtocolsTracker as the "Flexibility" action.
+ * no-XP tick). `yoga`, `sauna` and `cold_plunge` moved to ProtocolsTracker,
+ * which counts them as actions per week.
  * XP already awarded is untouched; it lives in LevelUp's own history.
  */
-const RETIRED_ACTIVITY_IDS = new Set(['yoga'])
+const RETIRED_ACTIVITY_IDS = new Set(['yoga', 'sauna', 'cold_plunge'])
 
 const habitIdOf = (slot: string): string => slot.slice(0, slot.lastIndexOf(':'))
 

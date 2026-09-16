@@ -64,9 +64,8 @@ export const HABIT_ROSTER: RosterActivity[] = [
   { activityId: 'pay_off_debt',   name: 'Pay off Debt',                categoryId: 'finance', basePoints: 20 },
 
   // Health
+  // Stretching, sauna and cold plunge are ProtocolsTracker actions now.
   { activityId: 'steps',       name: '5,000+ Steps in a Day', categoryId: 'health', basePoints: 15 },
-  { activityId: 'sauna',       name: 'Sauna',                 categoryId: 'health', basePoints: 15 },
-  { activityId: 'cold_plunge', name: 'Cold Plunge',           categoryId: 'health', basePoints: 15 },
 
   // Grooming
   { activityId: 'shower',              name: 'Shower',                       categoryId: 'grooming', basePoints: 5 },
