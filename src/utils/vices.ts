@@ -2,7 +2,7 @@ import type { ViceType } from '../types'
 import { WEED_TYPES } from './roster'
 
 /** What the user tapped. */
-export type ViceKind = 'weed_clean' | 'no_porn' | 'drinks_3plus'
+export type ViceKind = 'weed_clean' | 'no_porn' | 'no_food_delivery' | 'drinks_3plus'
 
 /**
  * Entry types that share a once-per-day slot with `kind`. A weed tap is still

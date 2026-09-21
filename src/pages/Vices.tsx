@@ -42,9 +42,10 @@ function ViceButton({ label, color, disabled, onClick }: ViceButtonProps) {
   )
 }
 
-const SIMPLE_VICES: { type: 'no_porn' | 'drinks_3plus'; emoji: string }[] = [
-  { type: 'no_porn',      emoji: '🚫' },
-  { type: 'drinks_3plus', emoji: '🍺' },
+const SIMPLE_VICES: { type: 'no_porn' | 'no_food_delivery' | 'drinks_3plus'; emoji: string }[] = [
+  { type: 'no_porn',          emoji: '🚫' },
+  { type: 'no_food_delivery', emoji: '🥡' },
+  { type: 'drinks_3plus',     emoji: '🍺' },
 ]
 
 export function Vices({ app }: { app: HabitApp }) {
@@ -113,7 +114,7 @@ export function Vices({ app }: { app: HabitApp }) {
             />
           </SystemCard>
 
-          {/* No Porn, 3+ Drinks — once a day each */}
+          {/* No Porn, No Food Delivery, 3+ Drinks — once a day each */}
           {SIMPLE_VICES.map(({ type, emoji }) => {
             const def = VICE_DEFS[type]
             const loggedToday = state.viceLog.some((e) => e.type === type && e.dateISO === today)

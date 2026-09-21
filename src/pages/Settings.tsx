@@ -40,6 +40,7 @@ const XP_ROWS: { label: string; xp: string }[] = [
   { label: 'Weekly task', xp: `+${TASK_XP} Responsibilities` },
   { label: 'Clean weed day', xp: `+${VICE_DEFS.no_weed.xp} Health` },
   { label: 'No Porn', xp: `+${VICE_DEFS.no_porn.xp} Health` },
+  { label: 'No Food Delivery', xp: `+${VICE_DEFS.no_food_delivery.xp} Health` },
   { label: '3+ Drinks', xp: `${VICE_DEFS.drinks_3plus.xp} Health` },
 ]
 

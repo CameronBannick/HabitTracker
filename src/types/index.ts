@@ -25,7 +25,7 @@ export interface WeeklyTask {
  * and `weed_over` retired with the weekly credit budget, but entries logged
  * under those rules are still in the log, so both stay in the union.
  */
-export type ViceType = 'no_weed' | 'weed_credit' | 'weed_over' | 'no_porn' | 'drinks_3plus'
+export type ViceType = 'no_weed' | 'weed_credit' | 'weed_over' | 'no_porn' | 'drinks_3plus' | 'no_food_delivery'
 
 export interface ViceEntry {
   id: string

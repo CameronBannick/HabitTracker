@@ -27,6 +27,7 @@ System, fully offline-capable.
 | Weekly task | +10 Responsibilities |
 | Weed: clean day | +10 Health |
 | No Porn | +15 Health |
+| No Food Delivery | +10 Health |
 | 3+ Drinks | −10 Health |
 
 Weed ran on a weekly credit budget until Sep 2026. Those entries stay in the
@@ -45,6 +46,7 @@ Over the shared Supabase `signals` bus, 1-for-1 (see LevelUp's
 | Task | `weekly_task` (+ `label` = task name) | `habit-tracker:task:<taskId>` |
 | Clean weed day | `vice_no_weed` | `habit-tracker:vice:<entryId>` |
 | No Porn / 3+ Drinks | `vice_no_porn` / `vice_drinks_3plus` | `habit-tracker:vice:<entryId>` |
+| No Food Delivery | `vice_no_food_delivery` | `habit-tracker:vice:<entryId>` |
 
 Signals are derived from state
 (`src/utils/completions.ts`), so a completion made offline goes out later.

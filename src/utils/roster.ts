@@ -89,11 +89,12 @@ export interface ViceDef {
 // created now, and both carry a null activityId, so re-deriving the signals
 // can never re-send one.
 export const VICE_DEFS: Record<ViceType, ViceDef> = {
-  no_weed:      { activityId: 'vice_no_weed',      label: 'No Weed',            xp: 10  },
-  weed_credit:  { activityId: null,                label: 'Weed · Credit Used', xp: 0   },
-  weed_over:    { activityId: null,                label: 'Weed · Over Budget', xp: -15 },
-  no_porn:      { activityId: 'vice_no_porn',      label: 'No Porn',            xp: 15  },
-  drinks_3plus: { activityId: 'vice_drinks_3plus', label: '3+ Drinks',          xp: -10 },
+  no_weed:          { activityId: 'vice_no_weed',          label: 'No Weed',            xp: 10  },
+  weed_credit:      { activityId: null,                    label: 'Weed · Credit Used', xp: 0   },
+  weed_over:        { activityId: null,                    label: 'Weed · Over Budget', xp: -15 },
+  no_porn:          { activityId: 'vice_no_porn',          label: 'No Porn',            xp: 15  },
+  no_food_delivery: { activityId: 'vice_no_food_delivery', label: 'No Food Delivery',   xp: 10  },
+  drinks_3plus:     { activityId: 'vice_drinks_3plus',     label: '3+ Drinks',          xp: -10 },
 }
 
 /** The weed card's entry types - at most one per day; two are retired. */
