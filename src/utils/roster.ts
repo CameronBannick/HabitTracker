@@ -44,9 +44,9 @@ export interface RosterActivity {
 
 /**
  * Every habit you can add. LevelUp's templates in the habit categories, minus
- * the ones another satellite already reports: `supplement` (Complete Daily
- * Protocols, ProtocolsTracker) and `study_math` (WeeklyPlanner). Offering those
- * here would award their XP twice.
+ * the ones another satellite already reports: `supplement` (Stack Taken) and
+ * `weekly_protocols` (Completed Weekly Protocols), both ProtocolsTracker, and
+ * `study_math` (WeeklyPlanner). Offering those here would award their XP twice.
  */
 export const HABIT_ROSTER: RosterActivity[] = [
   // Intelligence
