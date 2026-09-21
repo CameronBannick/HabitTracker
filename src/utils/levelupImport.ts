@@ -8,8 +8,7 @@
 //                 week is what the weekly auto-seed copies forward from
 //   tasks         this week's
 //   vices         this week's No Weed / No Porn, so today's can't be claimed
-//                 twice. Legacy No Alcohol / Hangover have no equivalent, and
-//                 weed credits start full: LevelUp never logged weed days.
+//                 twice. Legacy No Alcohol / Hangover have no equivalent.
 //
 // Everything already completed in here was scored by LevelUp. The caller must
 // mark those completions as sent (markAlreadySignaled) BEFORE they reach state.
@@ -59,7 +58,8 @@ const idOf = (slot: string): string => slot.slice(0, slot.lastIndexOf(':'))
  * carry the old name today.
  */
 const LEGACY_HABIT_NAMES: Record<string, string> = {
-  Journaling: 'journaling', // now "CBT Journal App"
+  Journaling: 'journaling',
+  'CBT Journal App': 'journaling',
 }
 
 export function mapLevelUpState(lu: LevelUpState, todayISO: string): ImportedSlice {

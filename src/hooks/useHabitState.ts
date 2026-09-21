@@ -190,9 +190,9 @@ export function useHabitState() {
   // ── Vices ──────────────────────────────────────────────────────────────────
 
   /**
-   * Log today's vice. Once per day per card (the weed card's three outcomes
-   * share one slot), and locked once logged — LevelUp can't take XP back.
-   * A weed day's credit-vs-over-budget is resolved here, once, and stored.
+   * Log today's vice. Once per day per card (a retired weed_credit or
+   * weed_over entry still holds that day's weed slot), and locked once
+   * logged — LevelUp can't take XP back.
    */
   const logVice = useCallback((kind: ViceKind): void => {
     const id = crypto.randomUUID() // outside the updater: StrictMode runs updaters twice
@@ -200,7 +200,7 @@ export function useHabitState() {
     setState((s) => {
       const group = viceGroup(kind)
       if (s.viceLog.some((e) => e.dateISO === dateISO && group.includes(e.type))) return s
-      const type = resolveViceType(kind, s.viceLog, dateISO)
+      const type = resolveViceType(kind)
       return { ...s, viceLog: [...s.viceLog, { id, type, dateISO, xpImpact: VICE_DEFS[type].xp }] }
     })
   }, [])

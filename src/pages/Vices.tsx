@@ -1,9 +1,7 @@
 import type { HabitApp } from '../hooks/useHabitState'
-import type { ViceType } from '../types'
 import { SystemCard } from '../components/SystemCard'
-import { VICE_DEFS, WEED_CREDITS_PER_WEEK, WEED_TYPES } from '../utils/roster'
+import { VICE_DEFS, WEED_TYPES } from '../utils/roster'
 import { currentWeekISO, fromLocalISODate, todayISO, weekISOOf } from '../utils/date'
-import { weedCreditsUsed } from '../utils/vices'
 
 const SL_BLUE  = '#1E7FFF'
 const SL_DIM   = 'rgba(30,127,255,0.12)'
@@ -57,11 +55,7 @@ export function Vices({ app }: { app: HabitApp }) {
   const weekEntries = state.viceLog.filter((e) => weekISOOf(fromLocalISODate(e.dateISO)) === thisWeek)
   const weekXP = weekEntries.reduce((sum, e) => sum + e.xpImpact, 0)
 
-  const creditsLeft = Math.max(0, WEED_CREDITS_PER_WEEK - weedCreditsUsed(state.viceLog, today))
-  const overThisWeek = weekEntries.filter((e) => e.type === 'weed_over').length
   const weedToday = state.viceLog.find((e) => e.dateISO === today && WEED_TYPES.includes(e.type))
-  // What "use" would be logged as right now — decided for real at log time.
-  const useType: ViceType = creditsLeft > 0 ? 'weed_credit' : 'weed_over'
 
   // Newest first; reversing before the stable sort keeps same-day entries newest-first too.
   const recentEntries = [...state.viceLog]
@@ -100,55 +94,23 @@ export function Vices({ app }: { app: HabitApp }) {
       <div className="px-4 pb-4">
         <div className="flex flex-col gap-3">
 
-          {/* Weed — weekly credit budget */}
+          {/* Weed — a clean day, or nothing to log */}
           <SystemCard>
             <div className="flex items-center justify-between mb-2">
               <p className="text-sm font-bold text-white">🌿 Weed</p>
-              <span className="text-xs font-bold" style={{ color: creditsLeft > 0 ? SL_BLUE : RED }}>
-                {creditsLeft}/{WEED_CREDITS_PER_WEEK} credits left
+              <span className="text-xs font-bold" style={{ color: xpColor(VICE_DEFS.no_weed.xp) }}>
+                {xpText(VICE_DEFS.no_weed.xp)} XP
               </span>
             </div>
-
-            <div className="flex gap-1.5 mb-2">
-              {Array.from({ length: WEED_CREDITS_PER_WEEK }, (_, i) => {
-                const available = i < creditsLeft
-                return (
-                  <div
-                    key={i}
-                    className="h-2 flex-1"
-                    style={{
-                      background: available ? SL_BLUE : 'rgba(255,255,255,0.07)',
-                      boxShadow: available ? `0 0 6px ${SL_BLUE}99` : 'none',
-                    }}
-                  />
-                )
-              })}
-            </div>
-
-            <div className="flex items-center justify-between mb-2">
-              <p className="text-[10px]" style={{ color: SL_LABEL }}>
-                Resets Monday
-                {overThisWeek > 0 && <span style={{ color: RED }}> · {overThisWeek} over budget</span>}
-              </p>
-              <p className="text-xs" style={{ color: SL_LABEL }}>
-                {weedToday ? `✓ ${VICE_DEFS[weedToday.type].label}` : 'Not logged today'}
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-2">
-              <ViceButton
-                label={`Clean Day ${xpText(VICE_DEFS.no_weed.xp)} XP`}
-                color={GREEN}
-                disabled={!!weedToday}
-                onClick={() => logVice('weed_clean')}
-              />
-              <ViceButton
-                label={useType === 'weed_credit' ? 'Use Credit · 0 XP' : `Over Budget ${xpText(VICE_DEFS.weed_over.xp)} XP`}
-                color={useType === 'weed_credit' ? SL_BLUE : RED}
-                disabled={!!weedToday}
-                onClick={() => logVice('weed_use')}
-              />
-            </div>
+            <p className="text-xs text-right mb-2" style={{ color: SL_LABEL }}>
+              {weedToday ? `✓ ${VICE_DEFS[weedToday.type].label}` : 'Not logged today'}
+            </p>
+            <ViceButton
+              label={weedToday ? 'Already Logged' : `Clean Day ${xpText(VICE_DEFS.no_weed.xp)} XP`}
+              color={GREEN}
+              disabled={!!weedToday}
+              onClick={() => logVice('weed_clean')}
+            />
           </SystemCard>
 
           {/* No Porn, 3+ Drinks — once a day each */}

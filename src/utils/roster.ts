@@ -25,13 +25,12 @@ export const CATEGORIES: CategoryInfo[] = [
   { id: 'intellect',        name: 'Intelligence',                 color: '#F59E0B', icon: 'Brain'         },
   { id: 'spiritual',        name: 'Spirituality & Mental Health', color: '#14B8A6', icon: 'Sparkles'      },
   { id: 'finance',          name: 'Financial Well-Being',         color: '#84CC16', icon: 'DollarSign'    },
-  { id: 'health',           name: 'Health',                       color: '#06B6D4', icon: 'Heart'         },
   { id: 'grooming',         name: 'Grooming',                     color: '#EC4899', icon: 'Shirt'         },
   { id: 'responsibilities', name: 'Responsibilities',             color: '#F97316', icon: 'ClipboardList' },
 ]
 
-/** Categories habits can be picked from (LevelUp's HABIT_CATEGORY_IDS). */
-export const HABIT_CATEGORY_IDS = ['intellect', 'spiritual', 'finance', 'health', 'grooming']
+/** Categories habits can be picked from - LevelUp's, minus Health. */
+export const HABIT_CATEGORY_IDS = ['intellect', 'spiritual', 'finance', 'grooming']
 
 export interface RosterActivity {
   /** LevelUp ACTIVITY_TEMPLATES id — the `activity_id` put on the wire. */
@@ -44,9 +43,8 @@ export interface RosterActivity {
 
 /**
  * Every habit you can add. LevelUp's templates in the habit categories, minus
- * the ones another satellite already reports: `supplement` (Stack Taken) and
- * `weekly_protocols` (Completed Weekly Protocols), both ProtocolsTracker, and
- * `study_math` (WeeklyPlanner). Offering those here would award their XP twice.
+ * the Health attribute, which ProtocolsTracker owns outright, and `study_math`
+ * (WeeklyPlanner). Offering those here would award their XP twice.
  */
 export const HABIT_ROSTER: RosterActivity[] = [
   // Intelligence
@@ -55,17 +53,13 @@ export const HABIT_ROSTER: RosterActivity[] = [
   // Spirituality & Mental Health
   { activityId: 'meditation', name: 'Meditation',      categoryId: 'spiritual', basePoints: 15 },
   { activityId: 'gratitude',  name: 'Gratitude',       categoryId: 'spiritual', basePoints: 10 },
-  { activityId: 'journaling', name: 'CBT Journal App', categoryId: 'spiritual', basePoints: 15 },
+  { activityId: 'journaling', name: 'Journal', categoryId: 'spiritual', basePoints: 15 },
 
   // Financial Well-Being
   { activityId: 'emergency_fund', name: 'Add Money to Emergency Fund', categoryId: 'finance', basePoints: 20 },
   { activityId: 'invest_401k',    name: 'Invest in 401k',              categoryId: 'finance', basePoints: 20 },
   { activityId: 'invest_roth',    name: 'Invest in Roth IRA',          categoryId: 'finance', basePoints: 20 },
   { activityId: 'pay_off_debt',   name: 'Pay off Debt',                categoryId: 'finance', basePoints: 20 },
-
-  // Health
-  // Stretching, sauna and cold plunge are ProtocolsTracker actions now.
-  { activityId: 'steps',       name: '5,000+ Steps in a Day', categoryId: 'health', basePoints: 15 },
 
   // Grooming
   { activityId: 'shower',              name: 'Shower',                       categoryId: 'grooming', basePoints: 5 },
@@ -82,8 +76,6 @@ export const HABIT_ROSTER: RosterActivity[] = [
 export const TASK_ACTIVITY_ID = 'weekly_task'
 export const TASK_XP = 10
 
-export const WEED_CREDITS_PER_WEEK = 4
-
 export interface ViceDef {
   /** LevelUp template id, or null when there is nothing to send (0 XP). */
   activityId: string | null
@@ -91,17 +83,20 @@ export interface ViceDef {
   xp: number
 }
 
-// All vice XP goes to Health. A credit-funded weed day is worth 0 and isn't
-// signalled at all — there is nothing for LevelUp to award.
+// All vice XP goes to Health in LevelUp. `weed_credit` and `weed_over` are
+// retired: weed ran on a weekly credit budget until Sep 2026. Entries logged
+// under those rules keep the label and the XP they were given, but neither is
+// created now, and both carry a null activityId, so re-deriving the signals
+// can never re-send one.
 export const VICE_DEFS: Record<ViceType, ViceDef> = {
-  no_weed:      { activityId: 'vice_no_weed',      label: 'No Weed',            xp: 15  },
+  no_weed:      { activityId: 'vice_no_weed',      label: 'No Weed',            xp: 10  },
   weed_credit:  { activityId: null,                label: 'Weed · Credit Used', xp: 0   },
-  weed_over:    { activityId: 'vice_weed_over',    label: 'Weed · Over Budget', xp: -15 },
+  weed_over:    { activityId: null,                label: 'Weed · Over Budget', xp: -15 },
   no_porn:      { activityId: 'vice_no_porn',      label: 'No Porn',            xp: 15  },
   drinks_3plus: { activityId: 'vice_drinks_3plus', label: '3+ Drinks',          xp: -10 },
 }
 
-/** The weed card's entry types — at most one of these per day. */
+/** The weed card's entry types - at most one per day; two are retired. */
 export const WEED_TYPES: ViceType[] = ['no_weed', 'weed_credit', 'weed_over']
 
 /** Every activity id this app may put on the wire. */

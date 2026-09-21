@@ -21,9 +21,9 @@ export interface WeeklyTask {
 }
 
 /**
- * What was logged on a day. The weed card writes exactly one of the first
- * three per day; `weed_credit` vs `weed_over` is decided once, when the entry
- * is logged, and stored — so a signal can never change meaning afterwards.
+ * What was logged on a day, at most one entry per card per day. `weed_credit`
+ * and `weed_over` retired with the weekly credit budget, but entries logged
+ * under those rules are still in the log, so both stay in the union.
  */
 export type ViceType = 'no_weed' | 'weed_credit' | 'weed_over' | 'no_porn' | 'drinks_3plus'
 

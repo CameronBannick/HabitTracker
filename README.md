@@ -1,3 +1,5 @@
+| Clean weed day | `vice_no_weed` | `habit-tracker:vice:<entryId>` |
+| Weed: clean day | +10 Health |
 # HabitTracker
 
 A LevelUp satellite app. It owns what used to be LevelUp's **Habits**, **Tasks**
@@ -12,8 +14,8 @@ System, fully offline-capable.
 
 - **Habits:** day-by-day habit list with week navigation. Each new day starts
   as a copy of the same weekday last week. The habit roster mirrors LevelUp's
-  habit templates, minus *Complete Daily Protocols* (ProtocolsTracker) and
-  *Study Math* (WeeklyPlanner), which other apps already report.
+  habit templates, minus the Health attribute, which ProtocolsTracker owns
+  outright, and *Study Math* (WeeklyPlanner), which WeeklyPlanner reports.
 - **Tasks:** a free-text to-do list for the current week.
 - **Vices:** one log per card per day, today only, locked once logged.
 
@@ -23,15 +25,14 @@ System, fully offline-capable.
 | --- | --- |
 | Habit | its LevelUp template value, to its attribute |
 | Weekly task | +10 Responsibilities |
-| Weed: clean day | +15 Health |
-| Weed: day using a credit (4 per Mon–Sun week) | 0 |
-| Weed: day with no credits left | −15 Health |
+| Weed: clean day | +10 Health |
 | No Porn | +15 Health |
 | 3+ Drinks | −10 Health |
 
-A weed day counts as a credit day or an over-budget day at the moment you log
-it, and that's stored on the entry, so it can never change later. Vices give
-Health XP but **never** count toward LevelUp's Health daily quest; habits do.
+Weed ran on a weekly credit budget until Sep 2026. Those entries stay in the
+log with the XP LevelUp already gave them, but a clean day is all this app
+logs now. Vices give Health XP but **never** count toward LevelUp's Health
+daily quest; habits do.
 
 ## How it talks to LevelUp
 
@@ -42,10 +43,10 @@ Over the shared Supabase `signals` bus, 1-for-1 (see LevelUp's
 | --- | --- | --- |
 | Habit | its roster id (e.g. `reading`) | `habit-tracker:habit:<habitId>:<date>` |
 | Task | `weekly_task` (+ `label` = task name) | `habit-tracker:task:<taskId>` |
-| Clean / over-budget weed | `vice_no_weed` / `vice_weed_over` | `habit-tracker:vice:<entryId>` |
+| Clean weed day | `vice_no_weed` | `habit-tracker:vice:<entryId>` |
 | No Porn / 3+ Drinks | `vice_no_porn` / `vice_drinks_3plus` | `habit-tracker:vice:<entryId>` |
 
-Credit days aren't sent (0 XP). Signals are derived from state
+Signals are derived from state
 (`src/utils/completions.ts`), so a completion made offline goes out later.
 
 > **Release LevelUp first.** LevelUp permanently skips an `activity_id` it
