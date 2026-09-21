@@ -7,7 +7,7 @@ import { fetchLatestBackup, pushBackup } from '../utils/cloudBackup'
 import { markAlreadySignaled, signalCompletions } from '../utils/cloudSignal'
 import { completionSignals } from '../utils/completions'
 import { fetchLevelUpBackup, mapLevelUpState, mergeImport } from '../utils/levelupImport'
-import { VICE_DEFS } from '../utils/roster'
+import { rosterActivity, VICE_DEFS } from '../utils/roster'
 import { resolveViceType, viceGroup, type ViceKind } from '../utils/vices'
 
 export type ImportResult =
@@ -154,7 +154,9 @@ export function useHabitState() {
           continue
         }
         const srcISO = toLocalISODate(addDays(fromLocalISODate(d), -7))
-        const source = habits.filter((h) => h.dateISO === srcISO)
+        // Retired activities stop here: a habit on an earlier day keeps working
+        // and still scores, but it is never carried into a new one.
+        const source = habits.filter((h) => h.dateISO === srcISO && rosterActivity(h.activityId))
         if (source.length === 0) continue // nothing to copy yet; leave unseeded
         // Deterministic ids: StrictMode double-invokes updaters, and a day is
         // seeded at most once, so (day, position) is unique.
