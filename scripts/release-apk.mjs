@@ -38,8 +38,8 @@ const STORE_NAME = 'HabitTracker'
 const STORE_TAGLINE = 'Daily habits, weekly tasks and vices, fed to LevelUp'
 const STORE_DESCRIPTION =
   'Owns three areas for LevelUp: daily habits, weekly tasks and vices. Plan habits day by day (each week ' +
-  'pre-fills from the last), keep a weekly to-do list, and track vices with a budget of 4 weed credits a ' +
-  'week, No Porn and 3+ Drinks. Every check-off lands in LevelUp with its XP automatically. ' +
+  'pre-fills from the last), keep a weekly to-do list, and log vices: clean weed days, No Porn, No Food ' +
+  'Delivery and 3+ Drinks. Every check-off lands in LevelUp with its XP automatically. ' +
   'Styled after the Solo Leveling System. Works fully offline.'
 const STORE_CATEGORY = 'Productivity'
 const APK_OUT = path.join(root, 'android', 'app', 'build', 'outputs', 'apk', 'debug', 'app-debug.apk')

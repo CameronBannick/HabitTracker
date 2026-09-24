@@ -28,10 +28,15 @@ export function isEmptyState(state: AppState): boolean {
  * reappear in every future week, and its signal would now reach a LevelUp that
  * no longer knows the id (unknown ids are skipped permanently — a silent
  * no-XP tick). `yoga`, `sauna` and `cold_plunge` moved to ProtocolsTracker,
- * which counts them as actions per week.
+ * which counts them as actions per week. The four Financial Well-Being habits
+ * moved to FinancialTracker (Sep 2026); keeping them here too would score
+ * every finance habit twice.
  * XP already awarded is untouched; it lives in LevelUp's own history.
  */
-const RETIRED_ACTIVITY_IDS = new Set(['yoga', 'sauna', 'cold_plunge'])
+const RETIRED_ACTIVITY_IDS = new Set([
+  'yoga', 'sauna', 'cold_plunge',
+  'emergency_fund', 'invest_401k', 'invest_roth', 'pay_off_debt',
+])
 
 const habitIdOf = (slot: string): string => slot.slice(0, slot.lastIndexOf(':'))
 

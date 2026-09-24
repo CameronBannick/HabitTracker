@@ -24,13 +24,12 @@ export interface CategoryInfo {
 export const CATEGORIES: CategoryInfo[] = [
   { id: 'intellect',        name: 'Intelligence',                 color: '#F59E0B', icon: 'Brain'         },
   { id: 'spiritual',        name: 'Spirituality & Mental Health', color: '#14B8A6', icon: 'Sparkles'      },
-  { id: 'finance',          name: 'Financial Well-Being',         color: '#84CC16', icon: 'DollarSign'    },
   { id: 'grooming',         name: 'Grooming',                     color: '#EC4899', icon: 'Shirt'         },
   { id: 'responsibilities', name: 'Responsibilities',             color: '#F97316', icon: 'ClipboardList' },
 ]
 
-/** Categories habits can be picked from - LevelUp's, minus Health. */
-export const HABIT_CATEGORY_IDS = ['intellect', 'spiritual', 'finance', 'grooming']
+/** Categories habits can be picked from - LevelUp's, minus Health (ProtocolsTracker) and Finance (FinancialTracker). */
+export const HABIT_CATEGORY_IDS = ['intellect', 'spiritual', 'grooming']
 
 export interface RosterActivity {
   /** LevelUp ACTIVITY_TEMPLATES id — the `activity_id` put on the wire. */
@@ -43,7 +42,8 @@ export interface RosterActivity {
 
 /**
  * Every habit you can add. LevelUp's templates in the habit categories, minus
- * the Health attribute, which ProtocolsTracker owns outright, and `study_math`
+ * the Health attribute, which ProtocolsTracker owns outright, Financial
+ * Well-Being, which FinancialTracker owns outright, and `study_math`
  * (WeeklyPlanner). Offering those here would award their XP twice.
  */
 export const HABIT_ROSTER: RosterActivity[] = [
@@ -54,12 +54,6 @@ export const HABIT_ROSTER: RosterActivity[] = [
   { activityId: 'meditation', name: 'Meditation',      categoryId: 'spiritual', basePoints: 15 },
   { activityId: 'gratitude',  name: 'Gratitude',       categoryId: 'spiritual', basePoints: 10 },
   { activityId: 'journaling', name: 'Journal', categoryId: 'spiritual', basePoints: 15 },
-
-  // Financial Well-Being
-  { activityId: 'emergency_fund', name: 'Add Money to Emergency Fund', categoryId: 'finance', basePoints: 20 },
-  { activityId: 'invest_401k',    name: 'Invest in 401k',              categoryId: 'finance', basePoints: 20 },
-  { activityId: 'invest_roth',    name: 'Invest in Roth IRA',          categoryId: 'finance', basePoints: 20 },
-  { activityId: 'pay_off_debt',   name: 'Pay off Debt',                categoryId: 'finance', basePoints: 20 },
 
   // Grooming
   { activityId: 'shower',              name: 'Shower',                       categoryId: 'grooming', basePoints: 5 },

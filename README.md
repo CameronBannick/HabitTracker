@@ -1,5 +1,3 @@
-| Clean weed day | `vice_no_weed` | `habit-tracker:vice:<entryId>` |
-| Weed: clean day | +10 Health |
 # HabitTracker
 
 A LevelUp satellite app. It owns what used to be LevelUp's **Habits**, **Tasks**
@@ -15,7 +13,8 @@ System, fully offline-capable.
 - **Habits:** day-by-day habit list with week navigation. Each new day starts
   as a copy of the same weekday last week. The habit roster mirrors LevelUp's
   habit templates, minus the Health attribute, which ProtocolsTracker owns
-  outright, and *Study Math* (WeeklyPlanner), which WeeklyPlanner reports.
+  outright, Financial Well-Being, which FinancialTracker owns outright, and
+  *Study Math* (WeeklyPlanner), which WeeklyPlanner reports.
 - **Tasks:** a free-text to-do list for the current week.
 - **Vices:** one log per card per day, today only, locked once logged.
 
