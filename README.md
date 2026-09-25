@@ -4,7 +4,7 @@ A LevelUp satellite app. It owns what used to be LevelUp's **Habits**, **Tasks**
 and **Vices** tabs: you plan and check things off here, and every completion is
 sent to LevelUp, which awards the XP. LevelUp no longer has those tabs.
 
-Built like its siblings (WeeklyPlanner, ProtocolsTracker): React + Vite +
+Built like its siblings (StudyTracker, ProtocolsTracker): React + Vite +
 Tailwind, wrapped with Capacitor for Android, styled after the Solo Leveling
 System, fully offline-capable.
 
@@ -14,7 +14,7 @@ System, fully offline-capable.
   as a copy of the same weekday last week. The habit roster mirrors LevelUp's
   habit templates, minus the Health attribute, which ProtocolsTracker owns
   outright, Financial Well-Being, which FinancialTracker owns outright, and
-  *Study Math* (WeeklyPlanner), which WeeklyPlanner reports.
+  *Study Math*, which StudyTracker reports.
 - **Tasks:** a free-text to-do list for the current week.
 - **Vices:** one log per card per day, today only, locked once logged.
 
