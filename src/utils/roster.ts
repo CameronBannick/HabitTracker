@@ -77,6 +77,8 @@ export interface ViceDef {
   xp: number
 }
 
+// ProtocolsTracker owns Vices now and signals them from there; these defs
+// stay only so the LevelUp import and old exports still map their entries.
 // All vice XP goes to Health in LevelUp. `weed_credit` and `weed_over` are
 // retired: weed ran on a weekly credit budget until Sep 2026. Entries logged
 // under those rules keep the label and the XP they were given, but neither is

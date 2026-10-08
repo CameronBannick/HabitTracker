@@ -1,6 +1,6 @@
 import type { AppState } from '../types'
 import type { SignalInput } from './cloudSignal'
-import { TASK_ACTIVITY_ID, VICE_DEFS } from './roster'
+import { TASK_ACTIVITY_ID } from './roster'
 
 /** "id:YYYY-MM-DD" → [id, date]. Ids may themselves contain colons; dates never do. */
 function splitSlot(slot: string): [string, string] {
@@ -18,7 +18,6 @@ function splitSlot(slot: string): [string, string] {
  *
  *   habit  habit:<habitId>:<date>   the habit's own activity
  *   task   task:<taskId>            weekly_task, named via label
- *   vice   vice:<entryId>           the vice's template; a credit day sends nothing
  */
 export function completionSignals(state: AppState): SignalInput[] {
   const habitsById = new Map(state.habits.map((h) => [h.id, h]))
@@ -38,11 +37,9 @@ export function completionSignals(state: AppState): SignalInput[] {
     return [{ activityId: TASK_ACTIVITY_ID, dateISO, occurrenceKey: `task:${id}`, label: task.name }]
   })
 
-  const vices = state.viceLog.flatMap((entry): SignalInput[] => {
-    const activityId = VICE_DEFS[entry.type]?.activityId
-    if (!activityId) return []
-    return [{ activityId, dateISO: entry.dateISO, occurrenceKey: `vice:${entry.id}` }]
-  })
+  // Vices belong to ProtocolsTracker now, which signals them from there.
+  // Emitting here too would pay LevelUp twice for the same day. state.viceLog
+  // stays put so old backups and exports still round-trip.
 
-  return [...habits, ...tasks, ...vices]
+  return [...habits, ...tasks]
 }

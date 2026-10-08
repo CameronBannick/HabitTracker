@@ -1,12 +1,11 @@
 import { NavLink } from 'react-router-dom'
-import { ClipboardList, Flame, ListChecks, Settings } from 'lucide-react'
+import { ClipboardList, ListChecks, Settings } from 'lucide-react'
 
 const SL_BLUE = '#1E7FFF'
 
 const NAV_ITEMS = [
   { to: '/',         icon: ListChecks,    label: 'Habits', end: true },
   { to: '/tasks',    icon: ClipboardList, label: 'Tasks'             },
-  { to: '/vices',    icon: Flame,         label: 'Vices'             },
   { to: '/settings', icon: Settings,      label: 'System'            },
 ]
 

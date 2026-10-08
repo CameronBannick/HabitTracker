@@ -3,7 +3,6 @@ import { useHabitState } from './hooks/useHabitState'
 import { BottomNav } from './components/BottomNav'
 import { Habits } from './pages/Habits'
 import { Tasks } from './pages/Tasks'
-import { Vices } from './pages/Vices'
 import { Settings } from './pages/Settings'
 
 function App() {
@@ -24,7 +23,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Habits app={app} />} />
           <Route path="/tasks" element={<Tasks app={app} />} />
-          <Route path="/vices" element={<Vices app={app} />} />
           <Route path="/settings" element={<Settings app={app} />} />
         </Routes>
       </div>

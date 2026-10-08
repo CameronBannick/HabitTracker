@@ -7,8 +7,7 @@ import { fetchLatestBackup, pushBackup } from '../utils/cloudBackup'
 import { markAlreadySignaled, signalCompletions } from '../utils/cloudSignal'
 import { completionSignals } from '../utils/completions'
 import { fetchLevelUpBackup, mapLevelUpState, mergeImport } from '../utils/levelupImport'
-import { rosterActivity, VICE_DEFS } from '../utils/roster'
-import { resolveViceType, viceGroup, type ViceKind } from '../utils/vices'
+import { rosterActivity } from '../utils/roster'
 
 export type ImportResult =
   | { status: 'ok'; habits: number; tasks: number; vices: number }
@@ -191,21 +190,7 @@ export function useHabitState() {
 
   // ── Vices ──────────────────────────────────────────────────────────────────
 
-  /**
-   * Log today's vice. Once per day per card (a retired weed_credit or
-   * weed_over entry still holds that day's weed slot), and locked once
-   * logged — LevelUp can't take XP back.
-   */
-  const logVice = useCallback((kind: ViceKind): void => {
-    const id = crypto.randomUUID() // outside the updater: StrictMode runs updaters twice
-    const dateISO = todayISO()
-    setState((s) => {
-      const group = viceGroup(kind)
-      if (s.viceLog.some((e) => e.dateISO === dateISO && group.includes(e.type))) return s
-      const type = resolveViceType(kind)
-      return { ...s, viceLog: [...s.viceLog, { id, type, dateISO, xpImpact: VICE_DEFS[type].xp }] }
-    })
-  }, [])
+  // Vices moved to ProtocolsTracker; nothing here writes viceLog any more.
 
   // ── Maintenance ────────────────────────────────────────────────────────────
 
@@ -219,7 +204,6 @@ export function useHabitState() {
     importFromLevelUp, importState,
     addHabit, removeHabit, completeHabit, seedHabitsForWeek,
     addTask, removeTask, completeTask,
-    logVice,
   }
 }
 

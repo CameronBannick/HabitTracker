@@ -4,7 +4,7 @@ import type { AppState } from '../types'
 import type { HabitApp, ImportResult } from '../hooks/useHabitState'
 import { SystemCard } from '../components/SystemCard'
 import { ENABLE_CLOUD_SIGNAL, SIGNAL_TARGET } from '../utils/cloudSignal'
-import { TASK_XP, VICE_DEFS } from '../utils/roster'
+import { TASK_XP } from '../utils/roster'
 
 const SL_BLUE  = '#1E7FFF'
 const SL_DIM   = 'rgba(30,127,255,0.12)'
@@ -38,10 +38,6 @@ function describeImport(result: ImportResult): string {
 const XP_ROWS: { label: string; xp: string }[] = [
   { label: 'Habit', xp: "its LevelUp value, to its attribute" },
   { label: 'Weekly task', xp: `+${TASK_XP} Responsibilities` },
-  { label: 'Clean weed day', xp: `+${VICE_DEFS.no_weed.xp} Health` },
-  { label: 'No Porn', xp: `+${VICE_DEFS.no_porn.xp} Health` },
-  { label: 'No Food Delivery', xp: `+${VICE_DEFS.no_food_delivery.xp} Health` },
-  { label: '3+ Drinks', xp: `${VICE_DEFS.drinks_3plus.xp} Health` },
 ]
 
 export function Settings({ app }: { app: HabitApp }) {
