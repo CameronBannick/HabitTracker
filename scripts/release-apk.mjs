@@ -35,12 +35,11 @@ const STORE_DIR = path.resolve(root, "..", "Cameron-s-App-Store")
 // into the published apk/icon filenames: never rename it once published.
 const STORE_ID = 'habit-tracker'
 const STORE_NAME = 'HabitTracker'
-const STORE_TAGLINE = 'Daily habits, weekly tasks and vices, fed to LevelUp'
+const STORE_TAGLINE = 'Daily habits and weekly tasks, fed to LevelUp'
 const STORE_DESCRIPTION =
-  'Owns three areas for LevelUp: daily habits, weekly tasks and vices. Plan habits day by day (each week ' +
-  'pre-fills from the last), keep a weekly to-do list, and log vices: clean weed days, No Porn, No Food ' +
-  'Delivery and 3+ Drinks. Every check-off lands in LevelUp with its XP automatically. ' +
-  'Styled after the Solo Leveling System. Works fully offline.'
+  'Owns two areas for LevelUp: daily habits and weekly tasks. Plan habits day by day (each week ' +
+  'pre-fills from the last) and keep a weekly to-do list. Every check-off lands in LevelUp with its ' +
+  'XP automatically. Styled after the Solo Leveling System. Works fully offline.'
 const STORE_CATEGORY = 'Productivity'
 const APK_OUT = path.join(root, 'android', 'app', 'build', 'outputs', 'apk', 'debug', 'app-debug.apk')
 
