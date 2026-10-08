@@ -1,6 +1,7 @@
 // Cross-app signal emitter — how HabitTracker reports into LevelUp.
 //
-// HabitTracker owns LevelUp's Habits, Tasks and Vices outright (utils/roster.ts).
+// HabitTracker owns LevelUp's Habits and Tasks outright (utils/roster.ts).
+// Vices went on to ProtocolsTracker and are signalled from there.
 // Every habit ticked, task finished and vice logged here POSTs one signal to a
 // shared Supabase table that LevelUp polls; LevelUp awards the XP from its own
 // templates.

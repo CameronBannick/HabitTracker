@@ -108,7 +108,7 @@ export function Settings({ app }: { app: HabitApp }) {
             </span>
           </div>
           <p className="text-[10px] font-mono leading-relaxed mb-3" style={{ color: SL_LABEL }}>
-            This app owns LevelUp's Habits, Tasks and Vices. Everything you check off here lands in
+            This app owns LevelUp's Habits and Tasks. Everything you check off here lands in
             LevelUp with its XP. Logged items can't be taken back there.
           </p>
           <div className="space-y-1">

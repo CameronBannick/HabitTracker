@@ -1,7 +1,8 @@
 // What this app owns on LevelUp's behalf, mirrored from LevelUp's
 // src/utils/activityTemplates.ts.
 //
-// HabitTracker has taken over LevelUp's Habits, Tasks and Vices tabs outright.
+// HabitTracker has taken over LevelUp's Habits and Tasks tabs outright.
+// Vices went on to ProtocolsTracker, which owns them now.
 // Everything is planned and checked off HERE; LevelUp only receives the
 // completions over the signals bus (see cloudSignal.ts) and awards the XP.
 //
